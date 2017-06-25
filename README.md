@@ -211,3 +211,19 @@ java文件中，代码如下：
 
 到这里，ExpandableLinearLayout的使用就介绍完毕了，关于ExpandableLinearLayout的源码解析可以查看我的博客：[http://blog.csdn.net/Chay_Chan/article/details/72810770](http://blog.csdn.net/Chay_Chan/article/details/72810770)
 
+
+####**导入方式**####
+在项目根目录下的build.gradle中的allprojects{}中，添加jitpack仓库地址，如下：
+
+    allprojects {
+	    repositories {
+	        jcenter()
+	        maven { url 'https://jitpack.io' }//添加jitpack仓库地址
+	    }
+	}
+ 
+打开app的module中的build.gradle，在dependencies{}中，添加依赖，如下：
+
+    dependencies {
+	       compile 'com.github.chaychan:ExpandableLinearLayout:1.0.0'
+	}
