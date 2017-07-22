@@ -114,6 +114,15 @@
 
 ![](./intro_img/ell_4.gif)
 
+#### 5.设置条目点击事件
+
+    ellProduct.setOnItemClickListener(new ExpandableLinearLayout.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(EllCustomBottomDemoActivity.this,names[position] , Toast.LENGTH_SHORT).show();
+            }
+        });
+
 ### 二、使用自定义底部
 
 布局文件中，ExpandableLinearLayout配置useDefaultBottom="false",声明不使用默认底部。自己定义底部的布局。

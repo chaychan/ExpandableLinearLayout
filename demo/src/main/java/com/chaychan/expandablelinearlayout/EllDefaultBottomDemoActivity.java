@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chaychan.expandablelinearlayout.bean.ProductBean;
@@ -60,6 +61,13 @@ public class EllDefaultBottomDemoActivity extends AppCompatActivity {
             viewHolder.refreshUI();
             ellProduct.addItem(view);//添加子条目
         }
+
+        ellProduct.setOnItemClickListener(new ExpandableLinearLayout.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(EllDefaultBottomDemoActivity.this,names[position] , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     class ViewHolder {

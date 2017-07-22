@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chaychan.expandablelinearlayout.bean.ProductBean;
@@ -62,7 +63,7 @@ public class EllCustomBottomDemoActivity extends AppCompatActivity {
 
         ellProduct.removeAllViews();//清除所有的子View（避免重新刷新数据时重复添加）
         //添加数据
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             View view = View.inflate(this, R.layout.item_product, null);
             ProductBean productBean = new ProductBean(imgUrls[i], names[i], intros[i], "12.00");
             ViewHolder viewHolder = new ViewHolder(view, productBean);
@@ -90,6 +91,13 @@ public class EllCustomBottomDemoActivity extends AppCompatActivity {
                 ellProduct.toggle();
             }
         });
+
+        ellProduct.setOnItemClickListener(new ExpandableLinearLayout.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(EllCustomBottomDemoActivity.this,names[position] , Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // 箭头的动画
@@ -102,7 +110,6 @@ public class EllCustomBottomDemoActivity extends AppCompatActivity {
             ObjectAnimator.ofFloat(ivArrow, "rotation", -180, 0).start();
         }
     }
-
 
     class ViewHolder {
         @Bind(R.id.iv_img)

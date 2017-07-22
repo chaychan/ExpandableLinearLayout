@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            app:defaultItemCount="2"
+            app:defaultItemCount="3"
             app:useDefaultBottom="false"
             >
 

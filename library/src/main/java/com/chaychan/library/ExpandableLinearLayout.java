@@ -34,6 +34,7 @@ public class ExpandableLinearLayout extends LinearLayout implements View.OnClick
     private float fontSize;
     private int textColor;
     private int arrowResId;
+    private int mPosition;
 
     public ExpandableLinearLayout(Context context) {
         this(context, null);
@@ -85,10 +86,10 @@ public class ExpandableLinearLayout extends LinearLayout implements View.OnClick
 
 
     public void addItem(View view) {
-        int childCount = getChildCount();
         if (!useDefaultBottom){
             //如果不使用默认底部
             addView(view);
+            int childCount = getChildCount();
             if (childCount > defaultItemCount){
                 hide();
             }
@@ -100,7 +101,8 @@ public class ExpandableLinearLayout extends LinearLayout implements View.OnClick
             //如果还没有底部
             addView(view);
         } else {
-            addView(view, childCount - 2);//插在底部之前
+            int childCount = getChildCount();
+            addView(view, childCount - 1);//插在底部之前
         }
         refreshUI(view);
     }
@@ -205,13 +207,13 @@ public class ExpandableLinearLayout extends LinearLayout implements View.OnClick
         isExpand = !isExpand;
 
         //回调
-        if (mListener != null){
-            mListener.onStateChanged(isExpand);
+        if (mStateListener != null){
+            mStateListener.onStateChanged(isExpand);
         }
     }
 
 
-    private OnStateChangeListener mListener;
+    private OnStateChangeListener mStateListener;
 
     /**
      * 定义状态改变接口
@@ -221,6 +223,25 @@ public class ExpandableLinearLayout extends LinearLayout implements View.OnClick
     }
 
     public void setOnStateChangeListener(OnStateChangeListener mListener) {
-        this.mListener = mListener;
+        this.mStateListener = mListener;
+    }
+
+
+    public void setOnItemClickListener(final OnItemClickListener listener){
+        int endIndex = useDefaultBottom ? getChildCount() - 1 : getChildCount();//如果是使用默认底部，则结束的下标是到底部之前
+        for (int i = 0; i< endIndex;i++){
+            View view = getChildAt(i);
+            final int position = i;
+            view.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(v,position);
+                }
+            });
+        }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View view,int position);
     }
 }
