@@ -234,5 +234,5 @@ java文件中，代码如下：
 打开app的module中的build.gradle，在dependencies{}中，添加依赖，如下：
 
     dependencies {
-	       compile 'com.github.chaychan:ExpandableLinearLayout:1.0.0'
+	       compile 'com.github.chaychan:ExpandableLinearLayout:1.0.1'
 	}
